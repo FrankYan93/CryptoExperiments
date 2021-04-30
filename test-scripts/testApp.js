@@ -50,3 +50,26 @@ const readSmartContract = () => {
 // get transaction from specific block
 // const hash = '0xd996bcc5fd8f1953ef36f44094bf13fc35863e66353df1a3e7fdd6c1214ad436'
 // web3.eth.getTransactionFromBlock(hash, 2).then(console.log)
+
+
+
+// Get average gas price in wei from last few blocks median gas price
+// web3.eth.getGasPrice().then((result) => {
+//     console.log(web3.utils.fromWei(result, 'ether'))
+//   }
+// )
+  
+// Use sha256 Hashing function
+// console.log(web3.utils.sha3('something funky'))
+
+// Use keccak256 Hashing function (alias)
+// console.log(web3.utils.keccak256('something funky'))
+
+// Get a Random Hex
+// console.log(web3.utils.randomHex(32))
+
+// Get access to the underscore JS library
+// const _ = web3.utils._
+// _.each({ key1: 'value1', key2: 'value2' }, (value, key) => {
+//     console.log(key)
+// })
