@@ -19,7 +19,34 @@ const readSmartContract = () => {
 
     // console.log(contract.methods)
     contract.methods.balanceOf('0xdB8E45c57d70E6c4D4e476b0422997d7E5583361').call((err, result) => { console.log(result) })
+
+    // Get Contract Event Stream
+    // contract.getPastEvents(
+    //     'AllEvents',
+    //     {
+    //     fromBlock: 3068079,
+    //     toBlock: 'latest'
+    //     },
+    //     (err, events) => { console.log(events) }
+    // )
 }
 
 // readSmartContract()
 
+
+// get latest block number
+// web3.eth.getBlockNumber().then(console.log)
+
+// // get latest block
+// web3.eth.getBlock('latest').then(console.log)
+
+// get latest 10 blocks
+// web3.eth.getBlockNumber().then((latest) => {
+//   for (let i = 0; i < 10; i++) {
+//     web3.eth.getBlock(latest - i).then(console.log)
+//   }
+// })
+
+// get transaction from specific block
+// const hash = '0xd996bcc5fd8f1953ef36f44094bf13fc35863e66353df1a3e7fdd6c1214ad436'
+// web3.eth.getTransactionFromBlock(hash, 2).then(console.log)
