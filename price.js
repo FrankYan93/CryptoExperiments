@@ -2,6 +2,8 @@ import ccxt from 'ccxt';
 const { exchanges } = ccxt;
 
 (async function () {
+    const coinbaseFee = 0.005
+    const binanceFee = 0.00075
     let coinbasepro  = new ccxt.coinbasepro ({
         apiKey: process.env.COINBASE_PRO_API_KEY,
         secret: process.env.COINBASE_PRO_API_SECRET,
@@ -21,9 +23,14 @@ const { exchanges } = ccxt;
     console.log(coinbasepro.id, coinbaseStorj.bid, coinbaseStorj.ask)
     console.log(binanceus.id, binanceStorj.bid, binanceStorj.ask)
 
+    let profitRate1 = (binanceStorj.bid*(1-binanceFee) - coinbaseStorj.ask*(1+coinbaseFee)) / (coinbaseStorj.ask*(1+coinbaseFee))
+    let profitRate2 = (coinbaseStorj.bid*(1-coinbaseFee) - binanceStorj.ask*(1+binanceFee)) / (binanceStorj.ask*(1+binanceFee))
+    console.log(profitRate1, profitRate2)
     // fee binance 0.075%, coinbase 0.50%, 5% 差价可以搞？
-    if ((binanceStorj.bid - coinbaseStorj.ask) / coinbaseStorj.ask > 0.05) {
-        // buy at coinbase, sell at binance
+    if (profitRate1 > 0.05) {
+        console.log("buy at coinbase, sell at binance")
+    } else if (profitRate2 > 0.05) {
+        console.log("buy at binance, sell at coinbase")
     }
 
     // console.log (binanceus.id, await binanceus.fetchBalance ())
