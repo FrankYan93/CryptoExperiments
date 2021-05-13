@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/FrankYan93/CryptoExperiments/issues"
   },
-  "homepage": "https://github.com/FrankYan93/CryptoExperiments#readme"
+  "homepage": "https://github.com/FrankYan93/CryptoExperiments#readme",
+  "dependencies": {
+    "ccxt": "^1.49.91"
+  }
 }
