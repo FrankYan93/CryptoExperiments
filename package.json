@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/FrankYan93/CryptoExperiments#readme",
   "dependencies": {
-    "ccxt": "^1.49.91"
+    "ccxt": "^1.49.91",
+    "node-fetch": "^2.6.1",
+    "stellar-base": "^5.2.1",
+    "stellar-sdk": "^8.2.0"
   }
 }
