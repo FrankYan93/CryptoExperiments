@@ -14,6 +14,11 @@ const { exchanges } = ccxt;
         secret: process.env.BINANCE_API_SECRET,
     })
 
+    let kucoin  = new ccxt.kucoin ({
+        apiKey: process.env.KUCOIN_API_KEY,
+        secret: process.env.KUCOIN_API_SECRET,
+    })
+
     // console.log (coinbasepro.id,  await coinbasepro.loadMarkets  ())
     // console.log (binanceus.id,  await binanceus.loadMarkets ())
 
@@ -39,10 +44,10 @@ const { exchanges } = ccxt;
     // const watchList = ['STORJ/USD', 'XLM/USD', 'EOS/USD'];
     // const watchList = ['DASH/USD', 'ENJ/USD', 'ALGO/USD'];
 
-    const watchList = ['ADA/USD', 'ATOM/USD', 'LTC/USD', 'XTZ/USD'];
+    const watchList = ['ADA/USDT', 'ATOM/USDT', 'LTC/USDT'];
     for (let i=0;i<watchList.length; i++) {
         console.log(watchList[i])
-        await comparePrice(coinbasepro, binanceus, watchList[i])
+        await comparePrice(kucoin, binanceus, watchList[i])
         console.log(separatorLine)
     }
 
