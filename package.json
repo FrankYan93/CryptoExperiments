@@ -26,6 +26,6 @@
     "node-fetch": "^2.6.1",
     "readline-sync": "^1.4.10",
     "stellar-base": "^5.2.1",
-    "stellar-sdk": "^8.2.0"
+    "stellar-sdk": "^8.2.3"
   }
 }
