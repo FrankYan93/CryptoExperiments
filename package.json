@@ -23,9 +23,10 @@
     "command-line-args": "^5.1.1",
     "csv-streamify": "^4.0.0",
     "event-stream": "^4.0.1",
+    "got": "^12.0.1",
     "node-fetch": "^2.6.1",
     "readline-sync": "^1.4.10",
     "stellar-base": "^5.2.1",
-    "stellar-sdk": "^8.2.0"
+    "stellar-sdk": "^9.1.0"
   }
 }

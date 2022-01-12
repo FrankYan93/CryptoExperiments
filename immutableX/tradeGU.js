@@ -1,9 +1,9 @@
 import got from 'got';
-import fs from 'fs';  
+import fs from 'fs';
 
 const imxHost = 'api.x.immutable.com';
 const tokenPrices = {
-    'ETH': 3032,
+    'ETH': 3366,
     'GODS': 3.17,
     'IMX': 3.69
 }
@@ -14,10 +14,12 @@ const tokenAddresses = {
 class GU {
     cardName;
     rate;
-    constructor(cardName) {
-        this.cardName = cardName;
+    set;
+    constructor(item) {
+        this.cardName = item.name;
+        this.set = item.set;
     }
-    
+
     async usdPrice(tokenType) {
         let url = '';
         if (tokenType === 'ETH') {
@@ -59,23 +61,23 @@ function kSmallest(arr, k)
 }
 
 async function handler() {
-    const dataRaw = fs.readFileSync('.\\allCardsProto.json', 'utf8')
+    const dataRaw = fs.readFileSync('allCardsProto.json', 'utf8')
     const data = JSON.parse(dataRaw);
     const cards = [];
     for (const item of data.records) {
-        if (item.type === 'god power') {
+        if (!item.collectable) {
             continue;
         }
         try {
             // console.log(item.name);
-            const card = new GU(item.name);
+            const card = new GU(item);
             card.rate = await card.setRate();
             cards.push(card);
         } catch (e) {
             // console.log(`failed - ${item.name}`);
         }
     }
-    
+
     let k = 10;
     kSmallest(cards, k);
 }
