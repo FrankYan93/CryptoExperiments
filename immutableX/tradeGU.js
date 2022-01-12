@@ -3,9 +3,9 @@ import fs from 'fs';
 
 const imxHost = 'api.x.immutable.com';
 const tokenPrices = {
-    'ETH': 3366,
+    'ETH': 3377,
     'GODS': 3.17,
-    'IMX': 3.69
+    'IMX': 3.71
 }
 const tokenAddresses = {
     'GODS': '0xccc8cb5229b0ac8069c51fd58367fd1e622afd97',
@@ -27,9 +27,11 @@ class GU {
         } else {
             url = `https://${imxHost}/v1/orders?page_size=1&order_by=buy_quantity&direction=asc&status=active&buy_token_address=${tokenAddresses[tokenType]}&sell_token_name=${escape(this.cardName)}`;
         }
+        // url = `${url}&quality=Shadow`
+        // console.log(url);
         const res = await got(url);
         const result = JSON.parse(res.body).result[0];
-        // console.log(result.sell.data);
+        // console.log(result);
         const tokenQuantity = result.buy.data.quantity/1000000000000000000;
         // console.log(tokenType, tokenQuantity);
         const usd = tokenQuantity * tokenPrices[tokenType];
@@ -64,6 +66,7 @@ async function handler() {
     const dataRaw = fs.readFileSync('allCardsProto.json', 'utf8')
     const data = JSON.parse(dataRaw);
     const cards = [];
+    let counter = 0;
     for (const item of data.records) {
         if (!item.collectable) {
             continue;
@@ -73,6 +76,11 @@ async function handler() {
             const card = new GU(item);
             card.rate = await card.setRate();
             cards.push(card);
+            // test
+            // counter += 1;
+            // if (counter === 11) {
+            //   break;
+            // }
         } catch (e) {
             // console.log(`failed - ${item.name}`);
         }
