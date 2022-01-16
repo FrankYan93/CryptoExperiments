@@ -3,14 +3,16 @@ import fs from 'fs';
 
 const imxHost = 'api.x.immutable.com';
 const tokenPrices = {
-    'ETH': 3377,
-    'GODS': 3.17,
-    'IMX': 3.71
+    'ETH': 3339,
+    'GODS': 2.91,
+    'IMX': 3.59
 }
 const tokenAddresses = {
     'GODS': '0xccc8cb5229b0ac8069c51fd58367fd1e622afd97',
     'IMX': '0xf57e7e7c23978c3caec3c3548e3d615c346e79ff'
 }
+const qualities = ["Meteorite", "Shadow", "Gold", "Diamond"];
+const quality = qualities[2];
 class GU {
     cardName;
     rate;
@@ -27,7 +29,7 @@ class GU {
         } else {
             url = `https://${imxHost}/v1/orders?page_size=1&order_by=buy_quantity&direction=asc&status=active&buy_token_address=${tokenAddresses[tokenType]}&sell_token_name=${escape(this.cardName)}`;
         }
-        // url = `${url}&quality=Shadow`
+        url = `${url}&sell_metadata=%7B"quality"%3A%5B"${quality}"%5D%7D`
         // console.log(url);
         const res = await got(url);
         const result = JSON.parse(res.body).result[0];
