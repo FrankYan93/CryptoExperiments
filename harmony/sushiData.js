@@ -1,4 +1,5 @@
 import { request, gql } from 'graphql-request';
+import nodemailer from 'nodemailer';
 
 const exchangeUrl = 'https://sushi.graph.t.hmny.io/subgraphs/name/sushiswap/harmony-exchange';
 const pairs = {
@@ -154,11 +155,41 @@ async function handler() {
                 }
             }`
     );    
-    console.log('current stone price: ', result.pair.token0.derivedETH);
+    const msg1 = `current stone price: ${result.pair.token0.derivedETH}`;
+    console.log(msg1);
     const stoneRate = 1.017;
     const marketPrice = Number(result.pair.token0.derivedETH);
     const apy = Math.pow((stoneRate / marketPrice), 365 / 9);
-    console.log('apy: ', apy);
+    const msg2 = `apy: ${apy}`;
+    console.log(msg2);
+
+    const botEmail = 'youremail@gmail.com';
+    const botPassword = '';
+    if (apy > 1) {
+
+        const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: botEmail,
+            pass: botPassword
+        }
+        });
+
+        const mailOptions = {
+        from: botEmail,
+        to: 'frankyan93@gmail.com',
+        subject: 'Go buy stone',
+        text: `${msg1}\n${msg2}`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+        });
+    }
 }
 
 handler();
